@@ -1,0 +1,29 @@
+#! /usr/bin/python3
+import os
+
+# Get current working directory and save it to variable as string
+currentDir = os.getcwd()
+
+str(currentDir)
+
+os.system('clear')
+
+# Change to current working directory
+os.system('cd ' + currentDir)
+
+print("This simple program let's you sort files into folders based on file extension")
+strExt = str(input("Enter file extension: "))
+
+# Lower case just in case :P
+strExt.lower()
+
+# Sort them files
+print(f"Sorting {strExt} files...")
+
+# Create a directory based on extension
+os.makedirs(strExt.upper())
+
+# Move files to the directory
+os.system(f"mv -v ./*.{strExt} ./{strExt.upper()}")
+
+print("Done!")
