@@ -43,13 +43,14 @@ def moveTo(ext, dir):
     Looks for files at the specified directory and then moves them
     to a new folder that's named using the extension.
     """
-
+    if os.
     # Create a directory based on extension
-    os.makedirs(dir.upper())
+    os.system(f"mkdir {dir}")
     sortingMsg(ext)
 
+
     # Move files to the directory
-    os.system(f"mv -v ./*.{ext} ./{ext.upper()}")
+    os.system(f"cp ./*.{ext} {dir}")
     
 
 def sortingMsg(ext):
