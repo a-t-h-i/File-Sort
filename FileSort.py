@@ -6,6 +6,12 @@ import sys
 currentDir = str(os.getcwd())
 os.system('clear')
 
+def sortingMsg(ext):
+    print(f"Sorting {ext} files...")
+
+def moveMsg(ext):
+    print(f"Moved {ext} files!")
+
 def showHelp():
     """
     Show useful information about how to use the script
@@ -44,21 +50,16 @@ def moveTo(ext, fromDir, toDir):
     Looks for files at the specified directory and then moves them
     to a new folder that's named using the extension.
     """
-    os.system(f"cd {fromDir}")
-    os.system(f"pwd")
-    os.system(f"mkdir {toDir}")
-
-    moveMsg(ext)
-
-    # Move files to the directory
+    os.system(f"cd {fromDir} && mkdir {toDir}")
     os.system(f"mv {fromDir}/*.{ext} {toDir}")
+    moveMsg(ext)
     
-
-def sortingMsg(ext):
-    print(f"Sorting {ext} files...")
-
-def moveMsg(ext):
-    print(f"Moving {ext} files...")
+def compressTo(ext, fromDir, toDir):
+    moveTo(ext, fromDir, toDir)
+    # tar -zcvf file.tar.gz /path/to/dir/
+    os.system(f"cd {toDir} && tar -zcvf {ext}.tar.gz {fromDir}")
+    
+    return 1
 
 
 def getExt():
@@ -83,6 +84,9 @@ def main(arguments):
 
     if (operation == "-f"):
         moveTo(options[0], options[1], options[2])
+    
+    if (operation == "-c"):
+        compressTo(options[0], options[1], options[2])
             
     return ""
     
