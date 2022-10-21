@@ -39,22 +39,26 @@ def compressFiles(ext, dir):
     """
 
 
-def moveTo(ext, dir):
+def moveTo(ext, fromDir, toDir):
     """
     Looks for files at the specified directory and then moves them
     to a new folder that's named using the extension.
     """
-    # Create a directory based on extension
-    os.system(f"mkdir {dir}")
-    sortingMsg(ext)
+    os.system(f"cd {fromDir}")
+    os.system(f"pwd")
+    os.system(f"mkdir {toDir}")
 
+    moveMsg(ext)
 
     # Move files to the directory
-    os.system(f"mv ./*.{ext} {dir}")
+    os.system(f"mv {fromDir}/*.{ext} {toDir}")
     
 
 def sortingMsg(ext):
     print(f"Sorting {ext} files...")
+
+def moveMsg(ext):
+    print(f"Moving {ext} files...")
 
 
 def getExt():
@@ -78,7 +82,7 @@ def main(arguments):
     
 
     if (operation == "-f"):
-        moveTo(options[0], options[1])
+        moveTo(options[0], options[1], options[2])
             
     return ""
     
