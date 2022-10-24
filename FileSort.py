@@ -56,7 +56,11 @@ def moveTo(ext, fromDir, toDir):
     
 def compressTo(ext, fromDir, toDir):
     moveTo(ext, fromDir, toDir)
-    os.system(f"cd {fromDir} && tar -zcvf {toDir}.tar.gz {toDir} && rm -rf {toDir}")
+
+    #Remove the path to the directory to be only left with current directory
+    cd = toDir.split("/")[-1]
+
+    os.system(f"cd {fromDir} && tar -zcvf {cd}.tar.gz {toDir} && rm -rf {cd}")
     
     return 1
 
